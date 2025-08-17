@@ -6,6 +6,7 @@ function App() {
   const [preferences, setPreferences] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [recipe, setRecipe] = useState('');
+  const [recipeImage, setRecipeImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -24,9 +25,20 @@ function App() {
 
       const data = await response.json();
       setRecipe(data.recipe);
+      
+      // Get food image from MealDB
+      const recipeTitle = data.recipe.split('\n')[0].toLowerCase();
+      const foodName = recipeTitle.split(' ')[0]; // Get first word of recipe title
+      setRecipeImage(`https://www.themealdb.com/images/ingredients/${foodName}.png`);
+      
+      // Fallback to generic food image if needed
+      const img = new Image();
+      img.onerror = () => setRecipeImage('https://www.themealdb.com/images/ingredients/Chicken.png');
+      img.src = `https://www.themealdb.com/images/ingredients/${foodName}.png`;
     } catch (error) {
       console.error('Error:', error);
       setRecipe('Failed to generate recipe. Please try again.');
+      setRecipeImage('');
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +48,7 @@ function App() {
     <div className="App">
       <h1>AI Recipe Generator</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label>Dietary Needs:</label>
           <input
             type="text"
@@ -45,7 +57,7 @@ function App() {
             placeholder="e.g., vegetarian, gluten-free"
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Preferences:</label>
           <input
             type="text"
@@ -54,7 +66,7 @@ function App() {
             placeholder="e.g., quick meals, spicy"
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Available Ingredients:</label>
           <input
             type="text"
@@ -68,10 +80,27 @@ function App() {
         </button>
       </form>
 
+      {isLoading && <div className="loading">Creating your perfect recipe...</div>}
+
       {recipe && (
-        <div className="recipe-result">
-          <h2>Your Custom Recipe</h2>
-          <pre>{recipe}</pre>
+        <div className="recipe-container">
+          <div className="recipe-card">
+            {recipeImage && (
+              <img 
+                src={recipeImage} 
+                alt="Recipe" 
+                className="recipe-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://source.unsplash.com/600x400/?food';
+                }}
+              />
+            )}
+            <div className="recipe-content">
+              <h2 className="recipe-title">Your Custom Recipe</h2>
+              <div className="recipe-text">{recipe}</div>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -1,79 +1,118 @@
 .App {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  background: #f8f9fa;
+  min-height: 100vh;
 }
 
 h1 {
   color: #2c3e50;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
 }
 
 form {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 30px;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
 }
 
-form div {
-  margin-bottom: 15px;
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
   color: #2c3e50;
 }
 
 input {
   width: 100%;
-  padding: 10px;
+  padding: 0.8rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #3498db;
+  outline: none;
 }
 
 button {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 button:hover {
   background-color: #2980b9;
+  transform: translateY(-2px);
 }
 
 button:disabled {
   background-color: #95a5a6;
   cursor: not-allowed;
+  transform: none;
 }
 
-.recipe-result {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  text-align: left;
-  white-space: pre-wrap;
+.recipe-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-.recipe-result h2 {
+.recipe-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  flex: 1;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+}
+
+.recipe-content {
+  padding: 1.5rem;
+}
+
+.recipe-title {
   color: #2c3e50;
   margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-pre {
+.recipe-text {
   white-space: pre-wrap;
-  word-wrap: break-word;
-  font-family: Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: #333;
 }
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #3498db;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');

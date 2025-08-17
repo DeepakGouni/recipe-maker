@@ -34,7 +34,8 @@ app.post("/api/suggest-recipe", async (req, res) => {
       messages: [
         {
           role: "system",
-          content: "You are a professional chef creating customized recipes.",
+          content:
+            "You are a professional chef creating customized recipes. Always format your response with:\n1. Recipe name as first line\n2. Blank line\n3. Cooking time and servings\n4. Ingredients list\n5. Preparation steps\n6. Serving suggestions",
         },
         { role: "user", content: prompt },
       ],
